@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Iniciar Sesión</title>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <h1>Registrarse</h1>
+
+  <input type="email" id="registerEmail" placeholder="Email">
+  <input type="password" id="registerPassword" placeholder="Contraseña">
+  <button onclick="registerUser()">Registrarse</button>
+
+  <h2>Iniciar sesión</h2>
+
+  <input type="email" id="loginEmail" placeholder="Email">
+  <input type="password" id="loginPassword" placeholder="Contraseña">
+  <button onclick="loginEmailPassword()">Ingresar</button>
+  <button id="googleLoginBtn">Ingresar con Google</button>
+
+  <p id="mensaje"></p>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="auth.js"></script>
+
+  <script>
+    // Botón de login con Google
+    document.getElementById("googleLoginBtn").addEventListener("click", () => {
+      loginWithGoogle();
+    });
+  </script>
+</body>
+</html>

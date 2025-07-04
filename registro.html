@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro</title>
+  <script src="https://www.gstatic.com/firebasejs/9.24.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.24.0/firebase-auth-compat.js"></script>
+  <script src="auth.js"></script>
+  <style>
+    body { font-family: sans-serif; margin: 20px; }
+    input, button { display: block; margin: 10px 0; padding: 8px; width: 250px; }
+  </style>
+</head>
+<body>
+
+  <h2>Registrarse</h2>
+
+  <input type="email" id="email" placeholder="Email">
+  <input type="password" id="password" placeholder="Contraseña">
+  <button onclick="registerUser()">Registrarse</button>
+
+  <h2>Iniciar sesión</h2>
+
+  <input type="email" id="loginEmail" placeholder="Email">
+  <input type="password" id="loginPassword" placeholder="Contraseña">
+  <button onclick="loginEmailPassword()">Ingresar</button>
+
+  <br>
+  <button onclick="href=encuestas.html">volver</button>
+
+</body>
+</html>
