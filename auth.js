@@ -41,7 +41,7 @@ function loginEmailPassword() {
     .then((userCredential) => {
       localStorage.setItem("userEmail", userCredential.user.email);
       alert("Sesión iniciada correctamente.");
-      window.location.href = "encuestas.html";
+      window.location.href = "index.html";
     })
     .catch((error) => {
       alert("Error al iniciar sesión: " + error.message);
@@ -56,7 +56,7 @@ function loginWithGoogle() {
       const user = result.user;
       localStorage.setItem("userEmail", user.email);
       alert("Sesión iniciada con Google");
-      window.location.href = "encuestas.html";
+      window.location.href = "index.html";
     })
     .catch((error) => {
       alert("Error: " + error.message);
