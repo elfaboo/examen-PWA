@@ -93,13 +93,62 @@ window.addEventListener('online', () => {
   reenviarPendientes();
 });
 
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-      .then(() => console.log("SW registrado", reg.scope))
-      .catch(err => console.error("SW error:", err));
-  });
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/firebase-messaging-sw.js")
+    .then((registration) => {
+  console.log("Service Worker registrado:", registration);
+  })
+    .catch((err) => {
+      console.error("Error al registrar SW:", err);
+    });
 }
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAS7a5mV9As2GfbuzI4MIRp6Zv1itYDUBg",
+  authDomain: "pwa-notificaciones-fabri.firebaseapp.com",
+  projectId: "pwa-notificaciones-fabri",
+  storageBucket: "pwa-notificaciones-fabri.firebasestorage.app",
+  messagingSenderId: "140521245389",
+  appId: "1:140521245389:web:a263c7b9c9d0ed07443784"
+};
+
+// Evitar doble inicialización
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
+
+const messaging = firebase.messaging();
+
+// Registrar el Service Worker
+navigator.serviceWorker.register("firebase-messaging-sw.js").then((registration) => {
+  messaging.useServiceWorker(registration);
+
+  Notification.requestPermission().then((permission) => {
+    if (permission === "granted") {
+      messaging.getToken({
+        vapidKey: "TU_CLAVE_PUBLICA_VAPID"
+      }).then((currentToken) => {
+        if (currentToken) {
+          console.log("🔐 Token recibido:", currentToken);
+          // podés guardarlo o usarlo más adelante
+        } else {
+          console.warn("⚠️ No se obtuvo el token de FCM.");
+        }
+      }).catch((err) => {
+        console.error("❌ Error al obtener el token:", err);
+      });
+    } else {
+      console.warn("🔕 Permiso de notificaciones denegado.");
+    }
+  });
+});
+
+// Mostrar notificación en primer plano
+messaging.onMessage((payload) => {
+  console.log("📩 Notificación recibida en foreground:", payload);
+  alert("📣 " + payload.notification.title + "\n" + payload.notification.body);
+});
+
 
 inicializarDB();
 
