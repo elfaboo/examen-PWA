@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Encuesta Ciudad de Buenos Aires</title>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="auth.js"></script>
+
+</head>
+<body>
+  <div id="nav">
+    <a id="foto-logo" href=""><img src="assets/logo.jpg" class="logo"/></a>
+    <label class="switch">
+      <input type="checkbox" id="input">
+      <span class="slider"></span>
+    </label>
+    <div style="margin-top: 20px; display: flex; width: 100%; justify-content: end; margin-right: 50px; margin-bottom: 15px;">
+    <button id="btnLogin">Iniciar sesión</button>
+    <button id="btnLogout" style="display:none;">Cerrar sesión</button>
+    <span id="userEmail" style="margin-left:10px;"></span>
+  </div>
+
+  <script>
+    const userEmail = localStorage.getItem("userEmail");
+    if (userEmail) {
+      document.getElementById("btnLogin").style.display = "none";
+      document.getElementById("btnLogout").style.display = "inline";
+      document.getElementById("userEmail").textContent = "Sesión: " + userEmail;
+    } else {
+      document.getElementById("btnLogin").style.display = "inline";
+      document.getElementById("btnLogout").style.display = "none";
+    }
+
+    document.getElementById("btnLogin").addEventListener("click", () => {
+      window.location.href = "login.html";
+    });
+
+    document.getElementById("btnLogout").addEventListener("click", () => {
+      logout();
+    });
+  </script>
+    <h1 id="tituloh1">Ciudad de Buenos Aires</h1>
+  </div>
+  <div class="tabs">
+    <button data-tab="limpieza">Limpieza</button>
+    <button data-tab="transporte">Transporte</button>
+    <button data-tab="verdes">Espacios Verdes</button>
+    <button data-tab="eventos">Eventos Gratuitos</button>
+    <button data-tab="subte">Subte</button>
+    <button data-tab="seguridad">Seguridad</button>
+    <button data-tab="accesibilidad">Accesibilidad</button>
+  </div>
+  
+  <div id="content"></div>
+
+  <script type="module" src="app.js"></script>
+
+  
+</body>
+</html>

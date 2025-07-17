@@ -1,7 +1,7 @@
 const CACHE_NAME = "caba-encuesta-cache-v2";
 const FILES_TO_CACHE = [
   "/",
-  "/index.html",
+  "/encuestas.html",
   "/style.css",
   "/app.js",
   "/db.js",
