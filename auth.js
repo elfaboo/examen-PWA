@@ -72,6 +72,19 @@ function logout() {
     });
 }
 
+firebase.auth().signInWithEmailAndPassword(email, password)
+  .then((userCredential) => {
+    // Guardar email en localStorage
+    const userEmail = userCredential.user.email;
+    localStorage.setItem("usuarioEmail", userEmail);
+
+    console.log("Usuario autenticado:", userEmail);
+    // Redireccionar, mostrar mensaje, etc.
+  })
+  .catch((error) => {
+    console.error("Error al iniciar sesión:", error);
+  });
+
 // Verifica si hay sesión iniciada
 function checkAuth() {
   const userEmail = localStorage.getItem("userEmail");
